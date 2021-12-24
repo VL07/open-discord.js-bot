@@ -1,2 +1,3 @@
-# open discord.js bot
- A open source discord.js bot
+# discord.js-slash-command-handeler
+
+A slash command handeler with subcommands for discord.js
