@@ -92,3 +92,6 @@ Thumbs.db
 
 # Config
 config.js
+
+# Vscode
+.vscode/*
