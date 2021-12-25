@@ -1,3 +1,5 @@
+const { MessageEmbed } = require("discord.js");
+
 module.exports = {
 	name: "interactionCreate",
 	once: false,
@@ -57,8 +59,15 @@ module.exports = {
 		} catch (err) {
 			if (err) console.error(err);
 
+			const embed = new MessageEmbed()
+				.setColor("2F3136")
+				.setTitle("❌ | Error")
+				.setDescription("An error occurred while running the command")
+				.setTimestamp()
+				.setFooter("Use /help to get help");
+
 			await interaction.reply({
-				content: "An error occurred",
+				embeds: [embed],
 				ephemeral: true,
 			});
 		}

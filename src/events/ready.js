@@ -8,6 +8,8 @@ module.exports = {
 	execute(client, commands) {
 		console.log("Ready!");
 
+		client.user.setActivity("Github Commits", { type: "WATCHING" });
+
 		const clientId = client.user.id;
 
 		const rest = new REST({
@@ -24,7 +26,7 @@ module.exports = {
 					await rest.put(Routes.applicationCommands(clientId), {
 						body: commandsArr,
 					});
-					console.log("Successfully registerd commands globally");
+					console.log("Successfully registered commands globally");
 				} else {
 					const commandsArr = [];
 					for (const key in commands) {
@@ -33,7 +35,7 @@ module.exports = {
 					await rest.put(Routes.applicationGuildCommands(clientId, guildId), {
 						body: commandsArr,
 					});
-					console.log("Successfully registerd commands locally");
+					console.log("Successfully registered commands locally");
 				}
 			} catch (err) {
 				if (err) console.error(err);

@@ -10,8 +10,8 @@ module.exports = {
 			.setColor("2F3136")
 			.setTitle("🏓 | Ping")
 			.setDescription(`Latency is \`loading...\`.\nAPI Latency is \`${Math.round(interaction.client.ws.ping)}ms\``)
-			.setTimestamp(Date.now())
-			.setDescription("Use /help to get help");
+			.setTimestamp()
+			.setFooter("Use /help to get help");
 
 		const message = await interaction.channel.send({ embeds: [embed], fetchReply: true });
 
