@@ -3,8 +3,8 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName("ban")
-		.setDescription("Ban a member")
+		.setName("kick")
+		.setDescription("Kick a member")
 		.addUserOption(option =>
 			option
 				.setName("member")
@@ -17,14 +17,14 @@ module.exports = {
 				.setDescription("description")
 				.setRequired(false),
 		),
-	permissions: ["BAN_MEMBERS"],
+	permissions: ["KICK_MEMBERS"],
 	async execute(interaction) {
 		const user = interaction.options.getMember("member");
-		if (!user.bannable) {
+		if (!user.kickable) {
 			const embed = new MessageEmbed()
 				.setColor("2F3136")
 				.setTitle("❌ | Error")
-				.setDescription(`Couldn't ban \`${user.user.username}\``)
+				.setDescription(`Couldn't kick \`${user.user.username}\``)
 				.setTimestamp()
 				.setFooter("Use /help to get help");
 
@@ -36,12 +36,12 @@ module.exports = {
 		}
 		const reason = interaction.options.getString("reason");
 
-		await user.ban({ reason: reason || "No reason given" });
+		await user.kick({ reason: reason || "No reason given" });
 
 		const embed = new MessageEmbed()
 			.setColor("2F3136")
-			.setTitle("🔨 | Successfully Banned")
-			.setDescription(`Successfully banned \`${user.user.username}\` with the reason \`${reason || "No reason given"}\``)
+			.setTitle("🔨 | Successfully Kicked")
+			.setDescription(`Successfully kicked \`${user.user.username}\` with the reason \`${reason || "No reason given"}\``)
 			.setTimestamp()
 			.setFooter("Use /help to get help");
 
