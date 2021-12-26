@@ -137,7 +137,6 @@ const createCommands = (tree) => {
 const commandsFolder = fs.readdirSync("./src/commands");
 for (const folder of commandsFolder) {
 	const tree = createTree("./src/commands/" + folder, 0, undefined, undefined, {});
-	console.log(tree);
 	createCommands(tree);
 }
 
