@@ -9,13 +9,13 @@ const client = new Client({
 	],
 });
 
-const commandTree = {};
 const commands = [];
 client.commands = {};
 client.subCommands = {};
 client.subCommandGroups = {};
 
-const createTree = (dir, indents, cmdName, subCmdGroup) => {
+const createTree = (dir, indents, cmdName, subCmdGroup, ct) => {
+	const commandTree = ct;
 	const folders = [];
 	const files = dirTree(dir, { extensions: /\.js/ });
 	for (const c in files.children) {
@@ -45,16 +45,15 @@ const createTree = (dir, indents, cmdName, subCmdGroup) => {
 	}
 	if (indents === 0) {
 		for (const folder of folders) {
-			createTree(folder.path, indents + 1, folder.name, subCmdGroup);
+			createTree(folder.path, indents + 1, folder.name, subCmdGroup, commandTree);
 		}
 	} else if (indents === 1) {
 		for (const folder of folders) {
-			createTree(folder.path, indents + 1, cmdName, folder.name);
+			createTree(folder.path, indents + 1, cmdName, folder.name, commandTree);
 		}
 	}
+	return commandTree;
 };
-
-createTree("./src/commands", 0, undefined, undefined);
 
 const createCommands = (tree) => {
 	const folders = [];
@@ -135,7 +134,12 @@ const createCommands = (tree) => {
 	}
 };
 
-createCommands(commandTree);
+const commandsFolder = fs.readdirSync("./src/commands");
+for (const folder of commandsFolder) {
+	const tree = createTree("./src/commands/" + folder, 0, undefined, undefined, {});
+	console.log(tree);
+	createCommands(tree);
+}
 
 const eventFiles = fs
 	.readdirSync("./src/events")
