@@ -54,6 +54,32 @@ module.exports = {
 			return;
 		}
 
+		let hasPermission = true;
+		for (const permission of command.permissions || []) {
+			if (!(interaction.memberPermissions.has(permission))) {
+				hasPermission = false;
+			}
+		}
+		if (interaction.memberPermissions.has("ADMINISTRATOR")) {
+			hasPermission = true;
+		}
+
+		if (!hasPermission) {
+			const embed = new MessageEmbed()
+				.setColor("2F3136")
+				.setTitle("❌ | Missing Permission")
+				.setDescription("You don't have the right permission to execute that command.")
+				.setTimestamp()
+				.setFooter("Use /help to get help")
+				.addField("Needed permission:", `\`${command.permissions.join(", ")}\``);
+
+			await interaction.reply({
+				embeds: [embed],
+				ephemeral: true,
+			});
+			return;
+		}
+
 		try {
 			await command.execute(interaction);
 		} catch (err) {
