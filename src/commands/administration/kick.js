@@ -36,12 +36,12 @@ module.exports = {
 		}
 		const reason = interaction.options.getString("reason");
 
-		await user.kick({ reason: reason || "No reason given" });
+		await user.kick({ reason: reason || "No reason specified" });
 
 		const embed = new MessageEmbed()
 			.setColor("2F3136")
 			.setTitle("🔨 | Successfully Kicked")
-			.setDescription(`Successfully kicked \`${user.user.username}\` with the reason \`${reason || "No reason given"}\``)
+			.setDescription(`Successfully kicked \`${user.user.username}\` with the reason \`${reason || "No reason specified"}\``)
 			.setTimestamp()
 			.setFooter("Use /help to get help");
 
