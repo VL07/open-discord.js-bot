@@ -8,7 +8,7 @@ module.exports = {
 		.addUserOption(option =>
 			option
 				.setName("member")
-				.setDescription("The user to ban")
+				.setDescription("The user to remove the timeout from")
 				.setRequired(true),
 		),
 	permissions: ["TIMEOUT_MEMBERS"],
