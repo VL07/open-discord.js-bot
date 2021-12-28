@@ -9,7 +9,7 @@ module.exports = {
 		.addUserOption(option =>
 			option
 				.setName("member")
-				.setDescription("The user to ban")
+				.setDescription("The user to timeout")
 				.setRequired(true),
 		)
 		.addStringOption(option =>
@@ -21,7 +21,7 @@ module.exports = {
 		.addStringOption(option =>
 			option
 				.setName("reason")
-				.setDescription("description")
+				.setDescription("The reason for why the user should be timed out")
 				.setRequired(false),
 		),
 	permissions: ["TIMEOUT_MEMBERS"],
@@ -85,7 +85,7 @@ module.exports = {
 		const embed = new MessageEmbed()
 			.setColor("2F3136")
 			.setTitle("⏳ | Successfully Timed Out")
-			.setDescription(`Successfully timed out <@${user.id}> with the reason \`${reason || "No reason specified"}\` until <t:${Math.round((Date.now() + timeInSec) / 1000)}:F>`)
+			.setDescription(`Successfully timed out <@${user.id}> with the reason \`${reason || "No reason specified"}\` until <t:${Math.round((Date.now() / 1000) + timeInSec)}:F>`)
 			.setTimestamp()
 			.setFooter("Use /help to get help");
 
