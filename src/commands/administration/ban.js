@@ -36,12 +36,12 @@ module.exports = {
 		}
 		const reason = interaction.options.getString("reason");
 
-		await user.ban({ reason: reason || "No reason given" });
+		await user.ban({ reason: reason || "No reason specified" });
 
 		const embed = new MessageEmbed()
 			.setColor("2F3136")
 			.setTitle("🔨 | Successfully Banned")
-			.setDescription(`Successfully banned \`${user.user.username}\` with the reason \`${reason || "No reason given"}\``)
+			.setDescription(`Successfully banned \`${user.user.username}\` with the reason \`${reason || "No reason specified"}\``)
 			.setTimestamp()
 			.setFooter("Use /help to get help");
 
