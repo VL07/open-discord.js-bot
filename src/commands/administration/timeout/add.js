@@ -67,7 +67,7 @@ module.exports = {
 		try {
 			await user.timeout(timeInSec * 1000, reason || "No reason specified");
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 			const embed = new MessageEmbed()
 				.setColor("2F3136")
 				.setTitle("❌ | Error")
