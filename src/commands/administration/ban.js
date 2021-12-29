@@ -17,6 +17,7 @@ module.exports = {
 				.setDescription("description")
 				.setRequired(false),
 		),
+	category: "moderation",
 	permissions: ["BAN_MEMBERS"],
 	async execute(interaction) {
 		const user = interaction.options.getMember("member");

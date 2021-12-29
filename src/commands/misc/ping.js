@@ -5,6 +5,7 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("ping")
 		.setDescription("Get the bots latency"),
+	category: "misc",
 	async execute(interaction) {
 		const embed = new MessageEmbed()
 			.setColor("2F3136")
