@@ -1,11 +1,13 @@
 const { Client, Intents } = require("discord.js");
-const { token } = require("../config");
+const { token, mongoKey } = require("../config");
 const fs = require("fs");
 const dirTree = require("directory-tree");
+const db = require("./db");
 
 const client = new Client({
 	intents: [
 		Intents.FLAGS.GUILDS,
+		Intents.FLAGS.GUILD_MEMBERS,
 	],
 });
 
@@ -172,5 +174,7 @@ for (const cmdName in client.commands) {
 }
 
 console.log(cmdTreeStr);
+
+db.connect(mongoKey);
 
 client.login(token);
