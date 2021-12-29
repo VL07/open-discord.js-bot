@@ -66,7 +66,9 @@ const createCommands = (tree) => {
 			const command = require(`./${child.replace("src/", "")}`);
 
 			client.commands[command.data.name] = command;
-			commands.push(command.data.toJSON());
+			if (command.data.name !== "help") {
+				commands.push(command.data.toJSON());
+			}
 		} else if (!childName.includes(".")) {
 			folders.push(child);
 		}
@@ -155,6 +157,23 @@ for (const file of eventFiles) {
 		client.on(event.name, (...args) => event.execute(...args, commands));
 	}
 }
+
+const choices = [];
+
+for (const cmdName in client.commands) {
+	const cmd = client.commands[cmdName];
+	choices.push([ cmd.data.name, cmd.data.name ]);
+}
+
+client.commands.help.data.addStringOption(option =>
+	option
+		.addChoices(choices)
+		.setName("command")
+		.setDescription("The name of the command you want to get more info about")
+		.setAutocomplete(false),
+);
+
+commands.push(client.commands.help.data.toJSON());
 
 let cmdTreeStr = "Commands:";
 for (const cmdName in client.commands) {

@@ -11,6 +11,7 @@ module.exports = {
 				.setDescription("The amount of messages you want to delete")
 				.setRequired(true),
 		),
+	category: "moderation",
 	permissions: ["MANAGE_MESSAGES"],
 	async execute(interaction) {
 		const amount = interaction.options.getInteger("amount");

@@ -5,6 +5,7 @@ module.exports = {
 	data: new SlashCommandSubcommandBuilder()
 		.setName("uptime")
 		.setDescription("Get info about how long the bot has been up for"),
+	category: "misc",
 	async execute(interaction) {
 		let totalSeconds = (interaction.client.uptime / 1000);
 		const days = Math.floor(totalSeconds / 86400);
