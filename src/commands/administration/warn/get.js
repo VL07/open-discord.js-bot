@@ -20,7 +20,7 @@ module.exports = {
 
 		const embed = new MessageEmbed()
 			.setColor("2F3136")
-			.setTitle("⚠️ | Successfully Got Warnings")
+			.setTitle("⚠️ | Warnings")
 			.setDescription(`<@${member.user.id}> has \`${memberDb.warns}\` Warnings`)
 			.setTimestamp()
 			.setFooter("Use /help to get help");
