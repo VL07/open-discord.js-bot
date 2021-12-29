@@ -9,7 +9,7 @@ module.exports = {
 		.addUserOption(option =>
 			option
 				.setName("member")
-				.setDescription("The user to warn")
+				.setDescription("The user to remove warnings from")
 				.setRequired(true),
 		)
 		.addIntegerOption(option =>

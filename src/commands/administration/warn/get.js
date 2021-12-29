@@ -9,7 +9,7 @@ module.exports = {
 		.addUserOption(option =>
 			option
 				.setName("member")
-				.setDescription("The user to warn")
+				.setDescription("The user to get warnings from")
 				.setRequired(true),
 		),
 	permissions: ["KICK_MEMBERS"],
