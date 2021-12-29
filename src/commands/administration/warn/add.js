@@ -4,13 +4,19 @@ const getMember = require("../../../../lib/getMember");
 
 module.exports = {
 	data: new SlashCommandSubcommandBuilder()
-		.setName("get")
-		.setDescription("Get how many warns a member has")
+		.setName("add")
+		.setDescription("Add one warning to a member")
 		.addUserOption(option =>
 			option
 				.setName("member")
 				.setDescription("The user to warn")
 				.setRequired(true),
+		)
+		.addIntegerOption(option =>
+			option
+				.setName("warnings")
+				.setDescription("How many warnings to give")
+				.setRequired(false),
 		),
 	permissions: ["KICK_MEMBERS"],
 	async execute(interaction) {
@@ -18,10 +24,21 @@ module.exports = {
 
 		const memberDb = await getMember(member);
 
+		const warnings = interaction.options.getInteger("warnings");
+
+		memberDb.warns = memberDb.warns + warnings || 1;
+
+		try {
+			await memberDb.save();
+		} catch (err) {
+			console.error(err);
+			throw "error";
+		}
+
 		const embed = new MessageEmbed()
 			.setColor("2F3136")
-			.setTitle("⚠️ | Successfully Got Warnings")
-			.setDescription(`<@${member.user.id}> has \`${memberDb.warns}\` Warnings`)
+			.setTitle("⚠️ | Successfully Warned")
+			.setDescription(`Successfully warned <@${member.user.id}>, who now has \`${memberDb.warns}\` warnings`)
 			.setTimestamp()
 			.setFooter("Use /help to get help");
 
