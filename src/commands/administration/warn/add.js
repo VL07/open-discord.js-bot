@@ -5,7 +5,7 @@ const getMember = require("../../../../lib/getMember");
 module.exports = {
 	data: new SlashCommandSubcommandBuilder()
 		.setName("add")
-		.setDescription("Add one warning to a member")
+		.setDescription("Warn a member")
 		.addUserOption(option =>
 			option
 				.setName("member")
