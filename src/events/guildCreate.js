@@ -4,24 +4,20 @@ module.exports = {
 	name: "guildCreate",
 	once: false,
 	async execute(guild) {
-		Guild.findOne({ "id": guild.id })
-			.then((result) => {
-				console.log(result);
-				if (!result) {
-					const guildDb = new Guild({
-						id: guild.id,
-					});
-					guildDb.save()
-						.then((saveResult) => {
-							console.log(saveResult);
-						})
-						.catch((err) => {
-							console.error(err);
-						});
+		try {
+			const result = await Guild.findOne({ "id": guild.id });
+			if (!result) {
+				const guildDb = new Guild({
+					id: guild.id,
+				});
+				try {
+					await guildDb.save();
+				} catch (err) {
+					console.error(err);
 				}
-			})
-			.catch((err) => {
-				console.error(err);
-			});
+			}
+		} catch (err) {
+			console.error(err);
+		}
 	},
 };
